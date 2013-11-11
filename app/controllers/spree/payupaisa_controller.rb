@@ -38,23 +38,28 @@ module Spree
       end
 
       begin
-        merchant_key = "JBZaLc"
+        @merchant_key = "JBZaLc"
         merchant_salt = "GQs7yium"
-        base_url = "https://test.payu.in/_payment"
+        base_url = "https://test.payu.in/_payment?key=KosjoB"
         error = 0
         hashString = hash_calc '', ''
 
         rndm = Random.new.rand(2000000000000..300000000000000000000000).to_s
-        txnid = hash_calc('256',rndm)[0,20]
-        udf2 = txnid   
+        @txnid = hash_calc('256',rndm)[0,20].to_s[2,20]
+        @udf2 = @txnid   
         hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
-        hashString = merchant_key +"|"+ "12131313131313133" + "|" + current_order.total.to_s + "|" + "Gifts Anytime -Gifts item" +"|" 
-        hashString += current_order.bill_address.try(:full_name) +"|" + "sales@giftsanytime.com" + "|" + "" + "|"+ udf2.to_s   
+        @amount = current_order.total.to_s
+        @email = 'sales@giftsanytime.com' 
+        @phone = '9742306306' 
+        @firstname = 'akhilesh' 
+        hashString = @merchant_key +"|"+ @txnid + "|" + @amount + "|" + "productinfo" +"|" 
+        hashString += @firstname +"|" + @email + "|" + "" + "|"+@udf2   
         hashString += "|||||||||" + merchant_salt
-        hash = hash_calc('512', hashString)
+        @hash = hash_calc('512', hashString)
+        @hash = @hash.to_s[2..@hash.length-4]
         puts "In calculation hashString"
         puts hashString 
-        redirect_to  base_url, status:307
+        puts @hash
       end
     end
 
