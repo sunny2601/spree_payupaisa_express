@@ -1,0 +1,38 @@
+<form action="https://test.payu.in/_payment" method="post" name="payuForm">
+<input type="hidden" name="key" value="<%= @merchant_key %>" />
+      <input type="hidden" name="hash" value="<%= @hash %>"/>
+      <input type="hidden" name="txnid" value="<%= @txnid %>" />
+      <input type="hidden" name="udf2" value="<%= @txnid %>" />
+          <input type="hidden" name="service_provider" value="payu_paisa" />
+      <table>
+        <tr>
+          <td><b>Mandatory Parameters</b></td>
+        </tr>
+        <tr>
+          <td>Amount: </td>
+          <td><input name="amount" value="<%= @amount %>" /></td>
+          <td>First Name: </td>
+          <td><input name="firstname" id="firstname" value="<%= @firstname %>" /></td>
+        </tr>
+        <tr>
+          <td>Email: </td>
+          <td><input name="email" id="email" value="<%= @email %>" /></td>
+          <td>Phone: </td>
+          <td><input name="phone" value="<%= @phone %>" /></td>
+        </tr>
+        <tr>
+          <td>Product Info: </td>
+          <td colspan="3"><input name="productinfo" value="productinfo" size="64" /></td>
+        </tr>
+        <tr>
+          <td>Success URI: </td>
+          <td colspan="3"><input name="surl" value="www.giftsanytime.com" size="64" /></td>
+        </tr>
+        <tr>
+          <td>Failure URI: </td>
+          <td colspan="3"><input name="furl" value="www.giftsanytime.com?error=true" size="64" /></td>
+        </tr>
+      </table>
+     <input type="submit" /> 
+</form>
+
