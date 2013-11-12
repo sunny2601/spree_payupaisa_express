@@ -29,10 +29,6 @@ module Spree
         }
       end
 
-      # Because Payupaisa doesn't accept $0 items at all.
-      # See #10
-      # https://cms.paypal.com/uk/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_ECCustomizing
-      # "It can be a positive or negative value but not zero."
       items.reject! do |item|
         item[:Amount][:value].zero?
       end
