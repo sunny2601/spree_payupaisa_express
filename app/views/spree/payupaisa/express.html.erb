@@ -1,4 +1,4 @@
-<form action="https://test.payu.in/_payment" method="post" name="payuForm">
+<form action="<%= @base_url %>" method="post" name="payuForm">
 <input type="hidden" name="key" value="<%= @merchant_key %>" />
       <input type="hidden" name="hash" value="<%= @hash %>"/>
       <input type="hidden" name="txnid" value="<%= @txnid %>" />
@@ -26,11 +26,11 @@
         </tr>
         <tr>
           <td>Success URI: </td>
-          <td colspan="3"><input name="surl" value="www.giftsanytime.com" size="64" /></td>
+          <td colspan="3"><input name="surl" value="http://www.giftsanytime.com" size="64" /></td>
         </tr>
         <tr>
           <td>Failure URI: </td>
-          <td colspan="3"><input name="furl" value="www.giftsanytime.com?error=true" size="64" /></td>
+          <td colspan="3"><input name="furl" value="http://www.giftsanytime.com?error=true" size="64" /></td>
         </tr>
       </table>
      <input type="submit" /> 

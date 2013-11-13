@@ -3,9 +3,16 @@ module Spree
     preference :merchantkey, :string
     preference :merchantsalt, :string
     preference :merchantid, :string
-    preference :server, :string, default: 'sandbox'
+    preference :server, :string, default: 'test'
     preference :solution, :string, default: 'Mark'
     preference :logourl, :string, default: ''
+
+
+    def provider 
+      puts "In Provider" 
+      puts preferred_merchantkey 
+      self
+    end 
 
     def supports?(source)
       true

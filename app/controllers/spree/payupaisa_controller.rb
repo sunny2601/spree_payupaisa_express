@@ -13,7 +13,9 @@ module Spree
           :ItemCategory => "Physical"
         }
       end
-
+      
+      payment_method = Spree::PaymentMethod.find(params[:payment_method_id]) 
+      puts payment_method.provider.preferred_merchantkey
       tax_adjustments = current_order.adjustments.tax
       shipping_adjustments = current_order.adjustments.shipping
 
@@ -29,18 +31,14 @@ module Spree
         }
       end
 
-      # Because Payupaisa doesn't accept $0 items at all.
-      # See #10
-      # https://cms.paypal.com/uk/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_api_ECCustomizing
-      # "It can be a positive or negative value but not zero."
       items.reject! do |item|
         item[:Amount][:value].zero?
       end
 
       begin
-        @merchant_key = "JBZaLc"
-        merchant_salt = "GQs7yium"
-        base_url = "https://test.payu.in/_payment?key=KosjoB"
+        @merchant_key = payment_method.provider.preferred_merchantkey
+        merchant_salt = payment_method.provider.preferred_merchantsalt
+        @base_url = "https://" + payment_method.provider.preferred_server + ".payu.in/_payment"
         error = 0
         hashString = hash_calc '', ''
 
@@ -55,11 +53,9 @@ module Spree
         hashString = @merchant_key +"|"+ @txnid + "|" + @amount + "|" + "productinfo" +"|" 
         hashString += @firstname +"|" + @email + "|" + "" + "|"+@udf2   
         hashString += "|||||||||" + merchant_salt
+        puts hashString
         @hash = hash_calc('512', hashString)
         @hash = @hash.to_s[2..@hash.length-4]
-        puts "In calculation hashString"
-        puts hashString 
-        puts @hash
       end
     end
 
