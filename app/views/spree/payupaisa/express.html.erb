@@ -1,38 +1,40 @@
-<form action="<%= @base_url %>" method="post" name="payuForm">
-<input type="hidden" name="key" value="<%= @merchant_key %>" />
+<form action="<%= @base_url %>" method="post" name="payuForm" id="payuform">
+ <input type="hidden" name="key" value="<%= @merchant_key %>" />
       <input type="hidden" name="hash" value="<%= @hash %>"/>
       <input type="hidden" name="txnid" value="<%= @txnid %>" />
       <input type="hidden" name="udf2" value="<%= @txnid %>" />
           <input type="hidden" name="service_provider" value="payu_paisa" />
       <table>
         <tr>
-          <td><b>Mandatory Parameters</b></td>
-        </tr>
-        <tr>
           <td>Amount: </td>
-          <td><input name="amount" value="<%= @amount %>" /></td>
+          <td><input name="amount" value="<%= @amount %>" readonly/></td>
           <td>First Name: </td>
-          <td><input name="firstname" id="firstname" value="<%= @firstname %>" /></td>
+          <td><input name="firstname" id="firstname" value="<%= @firstname %>"  readonly/></td>
         </tr>
         <tr>
           <td>Email: </td>
-          <td><input name="email" id="email" value="<%= @email %>" /></td>
+          <td><input name="email" id="email" value="<%= @email %>" readonly /></td>
           <td>Phone: </td>
-          <td><input name="phone" value="<%= @phone %>" /></td>
+          <td><input name="phone" value="<%= @phone %>" readonly/></td>
         </tr>
         <tr>
           <td>Product Info: </td>
-          <td colspan="3"><input name="productinfo" value="productinfo" size="64" /></td>
+          <td colspan="3"><input name="productinfo" value="productinfo" size="64" readonly /></td>
         </tr>
         <tr>
           <td>Success URI: </td>
-          <td colspan="3"><input name="surl" value="http://www.giftsanytime.com" size="64" /></td>
+          <td colspan="3"><input name="surl" value="http://192.168.1.218:3000/payupaisa/confirm" size="64" readonly /></td>
         </tr>
         <tr>
           <td>Failure URI: </td>
-          <td colspan="3"><input name="furl" value="http://www.giftsanytime.com?error=true" size="64" /></td>
+          <td colspan="3"><input name="furl" value="http://www.giftsanytime.com?error=true" size="64" readonly /></td>
         </tr>
       </table>
-     <input type="submit" /> 
+     <input type="submit" value="Submit"/> 
 </form>
-
+<script>
+ $(document).ready(function() {
+     alert("hello"); 
+   // $("#payuform").submit();
+});
+</script>
