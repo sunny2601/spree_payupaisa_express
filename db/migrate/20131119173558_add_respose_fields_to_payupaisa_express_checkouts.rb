@@ -1,52 +1,52 @@
 class AddResposeFieldsToPayupaisaExpressCheckouts < ActiveRecord::Migration
   def change
-    	add_column :PG_TYPE, :string
-	add_column :addedon, :string
-	add_column :address1, :string
-	add_column :address2, :string
-	add_column :amount, :string
-	add_column :bank_ref_num, :string
-	add_column :bankcode, :string
-	add_column :cardhash, :string
-	add_column :cardnum, :string
-	add_column :city, :string
-	add_column :country, :string
-	add_column :discount, :string
-	add_column :email, :string
-	add_column :error, :string
-	add_column :error_Message, :string
-	add_column :field1, :string
-	add_column :field2, :string
-	add_column :field3, :string
-	add_column :field4, :string
-	add_column :field5, :string
-	add_column :field6, :string
-	add_column :field7, :string
-	add_column :field8, :string
-	add_column :field9, :string
-	add_column :firstname, :string
-	add_column :hash, :string
-	add_column :key, :string
-	add_column :lastname, :string
-	add_column :mihpayid, :string
-	add_column :mode, :string
-	add_column :name_on_card, :string
-	add_column :phone, :string
-	add_column :productinfo, :string
-	add_column :state, :string
-	add_column :status, :string
-	add_column :txnid, :string
-	add_column :udf1, :string
-	add_column :udf10, :string
-	add_column :udf2, :string
-	add_column :udf3, :string
-	add_column :udf4, :string
-	add_column :udf5, :string
-	add_column :udf6, :string
-	add_column :udf7, :string
-	add_column :udf8, :string
-	add_column :udf9, :string
-	add_column :unmappedstatus, :string
-	add_column :zipcode, :string
+    	add_column :spree_payupaisa_express_checkouts, :PG_TYPE, :string
+	add_column :spree_payupaisa_express_checkouts, :addedon, :string
+	add_column :spree_payupaisa_express_checkouts, :address1, :string
+	add_column :spree_payupaisa_express_checkouts, :address2, :string
+	add_column :spree_payupaisa_express_checkouts, :amount, :string
+	add_column :spree_payupaisa_express_checkouts, :bank_ref_num, :string
+	add_column :spree_payupaisa_express_checkouts, :bankcode, :string
+	add_column :spree_payupaisa_express_checkouts, :cardhash, :string
+	add_column :spree_payupaisa_express_checkouts, :cardnum, :string
+	add_column :spree_payupaisa_express_checkouts, :city, :string
+	add_column :spree_payupaisa_express_checkouts, :country, :string
+	add_column :spree_payupaisa_express_checkouts, :discount, :string
+	add_column :spree_payupaisa_express_checkouts, :email, :string
+	add_column :spree_payupaisa_express_checkouts, :error, :string
+	add_column :spree_payupaisa_express_checkouts, :error_Message, :string
+	add_column :spree_payupaisa_express_checkouts, :field1, :string
+	add_column :spree_payupaisa_express_checkouts, :field2, :string
+	add_column :spree_payupaisa_express_checkouts, :field3, :string
+	add_column :spree_payupaisa_express_checkouts, :field4, :string
+	add_column :spree_payupaisa_express_checkouts, :field5, :string
+	add_column :spree_payupaisa_express_checkouts, :field6, :string
+	add_column :spree_payupaisa_express_checkouts, :field7, :string
+	add_column :spree_payupaisa_express_checkouts, :field8, :string
+	add_column :spree_payupaisa_express_checkouts, :field9, :string
+	add_column :spree_payupaisa_express_checkouts, :firstname, :string
+	add_column :spree_payupaisa_express_checkouts, :hash, :string
+	add_column :spree_payupaisa_express_checkouts, :key, :string
+	add_column :spree_payupaisa_express_checkouts, :lastname, :string
+	add_column :spree_payupaisa_express_checkouts, :mihpayid, :string
+	add_column :spree_payupaisa_express_checkouts, :mode, :string
+	add_column :spree_payupaisa_express_checkouts, :name_on_card, :string
+	add_column :spree_payupaisa_express_checkouts, :phone, :string
+	add_column :spree_payupaisa_express_checkouts, :productinfo, :string
+	add_column :spree_payupaisa_express_checkouts, :state, :string
+	add_column :spree_payupaisa_express_checkouts, :status, :string
+	add_column :spree_payupaisa_express_checkouts, :txnid, :string
+	add_column :spree_payupaisa_express_checkouts, :udf1, :string
+	add_column :spree_payupaisa_express_checkouts, :udf10, :string
+	add_column :spree_payupaisa_express_checkouts, :udf2, :string
+	add_column :spree_payupaisa_express_checkouts, :udf3, :string
+	add_column :spree_payupaisa_express_checkouts, :udf4, :string
+	add_column :spree_payupaisa_express_checkouts, :udf5, :string
+	add_column :spree_payupaisa_express_checkouts, :udf6, :string
+	add_column :spree_payupaisa_express_checkouts, :udf7, :string
+	add_column :spree_payupaisa_express_checkouts, :udf8, :string
+	add_column :spree_payupaisa_express_checkouts, :udf9, :string
+	add_column :spree_payupaisa_express_checkouts, :unmappedstatus, :string
+	add_column :spree_payupaisa_express_checkouts, :zipcode, :string
   end
 end

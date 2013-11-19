@@ -1,6 +1,7 @@
 require 'digest'
 module Spree
   class PayupaisaController < StoreController
+    protect_from_forgery except: :confirm
     def express
       items = current_order.line_items.map do |item|
         {
@@ -62,9 +63,56 @@ module Spree
     def confirm
       order = current_order
       order.payments.create!({
-        :source => Spree::PayupaisaExpressCheckout.create({
-          :token => params[:token],
-          :payer_id => params[:PayerID]
+		:source => Spree::PayupaisaExpressCheckout.create({
+		:PG_TYPE  => params[:PG_TYPE],
+		:addedon  => params[:addedon],
+		:address1  => params[:address1],
+		:address2  => params[:address2],
+		:amount  => params[:amount],
+		:bank_ref_num  => params[:bank_ref_num],
+		:bankcode  => params[:bankcode],
+		:cardhash  => params[:cardhash],
+		:cardnum  => params[:cardnum],
+		:city  => params[:city],
+		:country  => params[:country],
+		:discount  => params[:discount],
+		:email  => params[:email],
+		:error  => params[:error],
+		:error_Message  => params[:error_Message],
+		:field1  => params[:field1],
+		:field2  => params[:field2],
+		:field3  => params[:field3],
+		:field4  => params[:field4],
+		:field5  => params[:field5],
+		:field6  => params[:field6],
+		:field7  => params[:field7],
+		:field8  => params[:field8],
+		:field9  => params[:field9],
+		:firstname  => params[:firstname],
+		:hash  => params[:hash],
+		:key  => params[:key],
+		:lastname  => params[:lastname],
+		:mihpayid  => params[:mihpayid],
+		:mode  => params[:mode],
+		:name_on_card  => params[:name_on_card],
+		:phone  => params[:phone],
+		:productinfo  => params[:productinfo],
+		:state  => params[:state],
+		:status  => params[:status],
+		:txnid  => params[:txnid],
+		:udf1  => params[:udf1],
+		:udf10  => params[:udf10],
+		:udf2  => params[:udf2],
+		:udf3  => params[:udf3],
+		:udf4  => params[:udf4],
+		:udf5  => params[:udf5],
+		:udf6  => params[:udf6],
+		:udf7  => params[:udf7],
+		:udf8  => params[:udf8],
+		:udf9  => params[:udf9],
+		:unmappedstatus  => params[:unmappedstatus],
+		:zipcode  => params[:zipcode]
+         
         } ),
         :amount => order.total,
         :payment_method => payment_method

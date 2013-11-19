@@ -9,7 +9,6 @@ module Spree
 
 
     def provider 
-      puts "In Provider" 
       puts preferred_merchantkey 
       self
     end 
@@ -27,7 +26,6 @@ module Spree
     end
 
     def purchase(amount, express_checkout, gateway_options={})
-
 
       if true
         Class.new do
