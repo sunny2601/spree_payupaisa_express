@@ -25,7 +25,7 @@ class AddResposeFieldsToPayupaisaExpressCheckouts < ActiveRecord::Migration
 	add_column :spree_payupaisa_express_checkouts, :field8, :string
 	add_column :spree_payupaisa_express_checkouts, :field9, :string
 	add_column :spree_payupaisa_express_checkouts, :firstname, :string
-	add_column :spree_payupaisa_express_checkouts, :hash, :string
+	add_column :spree_payupaisa_express_checkouts, :payupaisa_hash, :string
 	add_column :spree_payupaisa_express_checkouts, :key, :string
 	add_column :spree_payupaisa_express_checkouts, :lastname, :string
 	add_column :spree_payupaisa_express_checkouts, :mihpayid, :string

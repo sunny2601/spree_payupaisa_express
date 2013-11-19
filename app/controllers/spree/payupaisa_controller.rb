@@ -64,7 +64,7 @@ module Spree
       order = current_order
       order.payments.create!({
 		:source => Spree::PayupaisaExpressCheckout.create({
-		:PG_TYPE  => params[:PG_TYPE],
+                :PG_TYPE => params[:PG_TYPE],
 		:addedon  => params[:addedon],
 		:address1  => params[:address1],
 		:address2  => params[:address2],
@@ -89,7 +89,7 @@ module Spree
 		:field8  => params[:field8],
 		:field9  => params[:field9],
 		:firstname  => params[:firstname],
-		:hash  => params[:hash],
+		:payupaisa_hash  => params[:hash],
 		:key  => params[:key],
 		:lastname  => params[:lastname],
 		:mihpayid  => params[:mihpayid],
