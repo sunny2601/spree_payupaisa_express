@@ -2,6 +2,7 @@ Spree::Core::Engine.routes.draw do
   post '/payupaisa', :to => "payupaisa#express", :as => :payupaisa_express
   post '/payupaisa/confirm', :to => "payupaisa#confirm", :as => :confirm_payupaisa
   get '/payupaisa/cancel', :to => "payupaisa#cancel", :as => :cancel_payupaisa
+  post '/payupaisa/error', :to => "payupaisa#error", :as => :error_payupaisa
   get '/payupaisa/notify', :to => "payupaisa#notify", :as => :notify_payupaisa
 
   namespace :admin do

@@ -126,6 +126,11 @@ module Spree
       end
     end
 
+    def error 
+      flash[:notice] = "There was a problem in processing your payment.Please try with different payment method."
+      redirect_to checkout_state_path(current_order.state)
+    end
+
     def cancel
       flash[:notice] = "Don't want to use Payupaisa? No problems."
       redirect_to checkout_state_path(current_order.state)
