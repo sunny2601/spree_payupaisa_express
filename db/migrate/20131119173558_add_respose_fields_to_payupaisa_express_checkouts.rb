@@ -33,7 +33,6 @@ class AddResposeFieldsToPayupaisaExpressCheckouts < ActiveRecord::Migration
 	add_column :spree_payupaisa_express_checkouts, :name_on_card, :string
 	add_column :spree_payupaisa_express_checkouts, :phone, :string
 	add_column :spree_payupaisa_express_checkouts, :productinfo, :string
-	add_column :spree_payupaisa_express_checkouts, :state, :string
 	add_column :spree_payupaisa_express_checkouts, :status, :string
 	add_column :spree_payupaisa_express_checkouts, :txnid, :string
 	add_column :spree_payupaisa_express_checkouts, :udf1, :string
