@@ -2,6 +2,7 @@ require 'digest'
 module Spree
   class PayupaisaController < StoreController
     protect_from_forgery except: :confirm
+    skip_before_filter :verify_authenticity_token, :only => [:cancel]
     def express
       items = current_order.line_items.map do |item|
         {
@@ -16,7 +17,6 @@ module Spree
       end
       
       payment_method = Spree::PaymentMethod.find(params[:payment_method_id]) 
-      puts payment_method.provider.preferred_merchantkey
       tax_adjustments = current_order.adjustments.tax
       shipping_adjustments = current_order.adjustments.shipping
 
@@ -48,13 +48,15 @@ module Spree
         @udf2 = @txnid   
         hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10"
         @amount = current_order.total.to_s
-        @email = 'sales@giftsanytime.com' 
-        @phone = '9742306306' 
-        @firstname = 'akhilesh' 
+        @email = current_order.email 
+        if (address = current_order.bill_address ||current_order.ship_address)
+          @phone = address.phone
+        end
+
+        @firstname = current_order.name 
         hashString = @merchant_key +"|"+ @txnid + "|" + @amount + "|" + "productinfo" +"|" 
         hashString += @firstname +"|" + @email + "|" + "" + "|"+@udf2   
         hashString += "|||||||||" + merchant_salt
-        puts hashString
         @hash = hash_calc('512', hashString)
         @hash = @hash.to_s[2..@hash.length-4]
       end
@@ -62,6 +64,16 @@ module Spree
 
     def confirm
       order = current_order
+#      <SALT>|status||||||udf5|udf4|udf3|udf2|udf1|email|firstname|productinfo|amount|txnid|key
+      @merchant_key = payment_method.provider.preferred_merchantkey
+      merchant_salt = payment_method.provider.preferred_merchantsalt 
+      hashString = merchant_salt + "|"+ params[:status] +"||||||" +  params[:udf5] +"|" + params[:udf4] +"|" + params[:udf3] +"|"+ params[:udf2] +"|"+ params[:udf1] + "|" + params[:email] +"|" + params[:firstname] + "|" + params[:productinfo] +"|"+ params[:amount] + "|" + params[:txnid] +"|"+ @merchant_key
+      
+      @hash = hash_calc('512', hashString)
+      if (params[:hash] != @hash ) 
+         flash[:notice] = "There was a problem in processing your payment.Please try with different payment method."
+         render "error"
+  
       order.payments.create!({
 		:source => Spree::PayupaisaExpressCheckout.create({
                 :PG_TYPE => params[:PG_TYPE],
@@ -132,6 +144,57 @@ module Spree
     end
 
     def cancel
+      Spree::PayupaisaExpressCheckout.create({
+                :PG_TYPE => params[:PG_TYPE],
+                :addedon  => params[:addedon],
+                :address1  => params[:address1],
+                :address2  => params[:address2],
+                :amount  => params[:amount],
+                :bank_ref_num  => params[:bank_ref_num],
+                :bankcode  => params[:bankcode],
+                :cardhash  => params[:cardhash],
+                :cardnum  => params[:cardnum],
+                :city  => params[:city],
+                :country  => params[:country],
+                :discount  => params[:discount],
+                :email  => params[:email],
+                :error  => params[:error],
+                :error_Message  => params[:error_Message],
+                :field1  => params[:field1],
+                :field2  => params[:field2],
+                :field3  => params[:field3],
+                :field4  => params[:field4],
+                :field5  => params[:field5],
+                :field6  => params[:field6],
+                :field7  => params[:field7],
+                :field8  => params[:field8],
+                :field9  => params[:field9],
+                :firstname  => params[:firstname],
+                :payupaisa_hash  => params[:hash],
+                :key  => params[:key],
+                :lastname  => params[:lastname],
+                :mihpayid  => params[:mihpayid],
+                :mode  => params[:mode],
+                :name_on_card  => params[:name_on_card],
+                :phone  => params[:phone],
+                :productinfo  => params[:productinfo],
+                :state  => params[:state],
+                :status  => params[:status],
+                :txnid  => params[:txnid],
+                :udf1  => params[:udf1],
+                :udf10  => params[:udf10],
+                :udf2  => params[:udf2],
+                :udf3  => params[:udf3],
+                :udf4  => params[:udf4],
+                :udf5  => params[:udf5],
+                :udf6  => params[:udf6],
+                :udf7  => params[:udf7],
+                :udf8  => params[:udf8],
+                :udf9  => params[:udf9],
+                :unmappedstatus  => params[:unmappedstatus],
+                :zipcode  => params[:zipcode]
+
+        } )
       flash[:notice] = "Don't want to use Payupaisa? No problems."
       redirect_to checkout_state_path(current_order.state)
     end
