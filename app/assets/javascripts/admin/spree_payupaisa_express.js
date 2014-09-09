@@ -1,4 +1,4 @@
-//= require admin/spree_backend
+//= require backend/spree_backend
 
 SpreePayupaisaExpress = {
   hideSettings: function(paymentMethod) {
