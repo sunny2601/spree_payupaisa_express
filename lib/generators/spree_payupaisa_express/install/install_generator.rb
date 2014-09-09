@@ -5,13 +5,13 @@ module SpreePayupaisaExpress
       class_option :auto_run_migrations, :type => :boolean, :default => false
 
       def add_javascripts
-        append_file 'app/assets/javascripts/store/all.js', "//= require store/spree_payupaisa_express\n"
-        append_file 'app/assets/javascripts/admin/all.js', "//= require admin/spree_payupaisa_express\n"
+        append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require store/spree_payupaisa_express\n"
+        append_file 'vendor/assets/javascripts/spree/backend/all.js', "//= require admin/spree_payupaisa_express\n"
       end
 
       def add_stylesheets
-        frontend_css_file = "app/assets/stylesheets/store/all.css"
-        backend_css_file = "app/assets/stylesheets/admin/all.css"
+        frontend_css_file = "vendor/assets/stylesheets/spree/frontend/all.css"
+        backend_css_file = "vendor/assets/stylesheets/spree/backend/all.css"
 
         if File.exist?(backend_css_file) && File.exist?(frontend_css_file)
           inject_into_file frontend_css_file, " *= require store/spree_payupaisa_express\n", :before => /\*\//, :verbose => true
