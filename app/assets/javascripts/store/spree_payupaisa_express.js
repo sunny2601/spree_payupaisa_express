@@ -1,4 +1,4 @@
-//= require frontend/spree_frontend
+
 
 SpreePayupaisaExpress = {
   hidePaymentSaveAndContinueButton: function(paymentMethod) {
