@@ -30,11 +30,13 @@
           <td colspan="3"><input name="furl" value="http://192.168.1.218:3000/payupaisa/cancel?authencity_token=xbOc5kBhXAOAko0ja6TGjyD4sbC5MtBbI7PEd48uiRg=" size="64" readonly /></td>
         </tr>
       </table>
-     <input type="submit" value="Submit"/> 
+     <input type="submit" id="gmail" value="Submit"/> 
 </form>
 <script>
  $(document).ready(function() {
-     // alert("hello"); 
+  $('#gmail').on("click", function() { 
     $("#payuform").submit();
+  }
+     // alert("hello"); 
 });
 </script>
