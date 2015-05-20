@@ -70,9 +70,9 @@ module Spree
       hashString = merchant_salt + "|"+ params[:status] +"||||||" +  params[:udf5] +"|" + params[:udf4] +"|" + params[:udf3] +"|"+ params[:udf2] +"|"+ params[:udf1] + "|" + params[:email] +"|" + params[:firstname] + "|" + params[:productinfo] +"|"+ params[:amount] + "|" + params[:txnid] +"|"+ @merchant_key
 
       @hash = hash_calc('512', hashString)
-      if (params[:hash] != @hash )
-        flash[:notice] = "There was a problem in processing your payment.Please try with different payment method."
-        render "error"
+     if (params[:hash] == @hash[0] )
+        #flash[:notice] = "There was a problem in processing your payment.Please try with different payment method."
+        #render "error"
 
         order.payments.create!({
                                    :source => Spree::PayupaisaExpressCheckout.create({
@@ -132,7 +132,7 @@ module Spree
         order.next
         if order.complete?
           flash.notice = Spree.t(:order_processed_successfully)
-          redirect_to order_path(order, :token => order.token)
+          redirect_to order_path(order)+"?token="+ order.guest_token
         else
           redirect_to checkout_state_path(order.state)
         end
