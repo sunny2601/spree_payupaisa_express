@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <td>Success URI: </td>
-          <td colspan="3"><input name="surl" value="https://<%=Spree::Config[:site_url]%>/payupaisa/confirm?payment_method_id=<%=params[:payment_method_id]%>&authencity_token=<%params[:authenticity_token]%>" size="64" readonly /></td>
+          <td colspan="3"><input name="surl" value="http://<%=Spree::Config[:site_url]%>/payupaisa/confirm?payment_method_id=<%=params[:payment_method_id]%>&authencity_token=<%params[:authenticity_token]%>" size="64" readonly /></td>
         </tr>
         <tr>
           <td>Failure URI: </td>
-          <td colspan="3"><input name="furl" value="https://<%=Spree::Config[:site_url]%>/payupaisa/cancel?authencity_token=<%params[:authenticity_token]%>" size="64" readonly /></td>
+          <td colspan="3"><input name="furl" value="http://<%=Spree::Config[:site_url]%>/payupaisa/cancel?authencity_token=<%params[:authenticity_token]%>" size="64" readonly /></td>
         </tr>
       </table>
      <%= submit_tag 'Proceed to payment' %> 
